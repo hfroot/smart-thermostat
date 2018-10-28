@@ -1,5 +1,6 @@
 import random
 import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
 
 ############# These are pre-written helper functions ##########################
 ####### Please go to the empty main() function below to start #################
@@ -48,9 +49,8 @@ def getDay(day):
         'labels': days['labels'][startHour:startHour+24]
     }
 
-# plot multiple days for comparison purposes, returns a bar chart
+# supports plotting multiple days as a bar chart
 def plotData(labels, filename):
-    # NB: this is meant to be used with more than one day's worth of data
     # Assumes full days
     numberOfDays = int(len(labels)/24)
     colwidth = 0.6/numberOfDays
@@ -74,6 +74,24 @@ def plotData(labels, filename):
 def testModel(model, day, filename):
     predicted = model.predict(day['variables']).tolist()
     plotData(predicted + day['labels'], filename)
+
+################### Now comes the fun part, keep scrolling ####################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ######################### Start here! #########################################
 # this is where it all comes together

@@ -1,8 +1,5 @@
 import random
 import matplotlib.pyplot as plt
-# the below need importing as necessary
-from sklearn.linear_model import LinearRegression
-from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 
 ############# These are pre-written helper functions ##########################
@@ -52,9 +49,8 @@ def getDay(day):
         'labels': days['labels'][startHour:startHour+24]
     }
 
-# plot multiple days for comparison purposes, returns a bar chart
+# supports plotting multiple days as a bar chart
 def plotData(labels, filename):
-    # NB: this is meant to be used with more than one day's worth of data
     # Assumes full days
     numberOfDays = int(len(labels)/24)
     colwidth = 0.6/numberOfDays
@@ -79,27 +75,39 @@ def testModel(model, day, filename):
     predicted = model.predict(day['variables']).tolist()
     plotData(predicted + day['labels'], filename)
 
+################### Now comes the fun part, keep scrolling ####################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+######################### Start here! #########################################
 # this is where it all comes together
 def main():
     # Examine the data
     day = getData(1)
-
-    x = range(0, 24)
     y = day['labels']
-    plt.bar(x, y)
-    plt.xlabel('Hour')
-    fig = plt.gcf()
-    fig.savefig('day.png')
-    plt.clf()
+    plotData(y, "monday.png")
 
-    monTue = getData(2)['labels'][0:48]
+    monTue = getData(2)['labels']
     plotData(monTue, "mon_tue.png")
     friSat = getData(7)['labels'][96:144]
     plotData(friSat, "fri_sat.png")
 
     # Train the model
     days = getData(5) # 50
-    # model = GaussianNB() #linear_model.LogisticRegression()
     model = KNeighborsClassifier()
     model.fit(days['variables'], days['labels'])
 
